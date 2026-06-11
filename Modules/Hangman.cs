@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Minigames.Interfaces;
 
 namespace Minigames.Modules;
@@ -8,13 +10,14 @@ public class Hangman : IModule
 
     private string word = "";
     private Dictionary<char, int> revealedWord = new();
-    private int attempts;
+    private List<char> lettersGuessed = new();
+    private int numberOfAttempts;
 
     public void Run()
     {
         word = GetRandomWord();           
         revealedWord = new();
-        attempts = 15;
+        numberOfAttempts = 15;
 
         Console.WriteLine("Hangman Game Starting...");
 
@@ -22,17 +25,21 @@ public class Hangman : IModule
         {
             Console.Clear();
             Console.WriteLine("Welcome to Hangman!");
-            Console.WriteLine($"Attempts left: {attempts}\n");
+            Console.WriteLine($"Attempts left: {numberOfAttempts}\n");
+            Console.WriteLine($"Letters guessed: {string.Join(" ", lettersGuessed)}\n");
 
             DisplayWord();
 
             Console.Write("\nEnter a letter: ");
-            string? input = Console.ReadLine();
 
+            string? input = Console.ReadLine();
+           
             if (string.IsNullOrEmpty(input))
                 continue;
 
             char guess = char.ToLower(input[0]);
+
+            lettersGuessed.Add(guess);
 
             ProcessGuess(guess);  
 
@@ -42,7 +49,7 @@ public class Hangman : IModule
                 break;
             }
 
-            if (attempts <= 0)
+            if (numberOfAttempts <= 0)
             {
                 Console.WriteLine($"\nYou lost! The word was: {word}");
                 break;
@@ -81,8 +88,9 @@ public class Hangman : IModule
         Console.WriteLine();
     }
 
-    public void ProcessGuess(char guess)
+    private void ProcessGuess(char guess)
     {
+        Console.WriteLine();
         if (word.Contains(guess))
         {
             if (!revealedWord.ContainsKey(guess))
@@ -97,11 +105,11 @@ public class Hangman : IModule
         }
         else
         {
-            attempts--;
+            numberOfAttempts--;
         }
     }
 
-    public bool CheckWin()
+    private bool CheckWin()
     {
         foreach (char c in word)
         {

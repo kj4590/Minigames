@@ -1,5 +1,8 @@
 ﻿using Minigames.Interfaces;
 using Minigames.Modules;
+using Minigames.Enums;
+using Minigames.Models;
+
 
 namespace Minigames;
 
@@ -7,36 +10,57 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<IModule> modules = new List<IModule>();
+        Console.Write("Enter your name: ");
+        string? name = Console.ReadLine();
 
-        modules.Add(new Hangman());
-
+        User currentUser = new User
+        {
+            Name = string.IsNullOrEmpty(name) ? "Guest" : name
+        };
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("=== Interactive Console Hub ===\n");
 
-            for (int i = 0; i < modules.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {modules[i].Name}");
-            }
-
+            Console.WriteLine("1. Hangman");
+            Console.WriteLine("2. Personality test");
+            Console.WriteLine("3. Impatient Calculator");
             Console.WriteLine("0. Exit");
             Console.Write("\nSelect an option: ");
+
 
             string? input = Console.ReadLine();
 
             if (int.TryParse(input, out int choice))
             {
-                if (choice == 0)
-                    break;
+                MenuOption option = (MenuOption)choice;
 
-                if (choice > 0 && choice <= modules.Count)
+                if (option == MenuOption.Exit)
                 {
-                    modules[choice - 1].Run();
+                    Console.WriteLine("Exiting...");
+                    return;
+                }
+
+                IModule? module = option switch
+                {
+                    MenuOption.Hangman => new Hangman(currentUser),
+                    //MenuOption.PersonalityTest => new PersonalityTest(),
+                   // MenuOption.ImpatientCalculator => new ImpatientCalculator(),
+                    _ => null
+                };
+
+                if (module is null)
+                {
+                    Console.WriteLine("Invalid option");
+                }
+                else
+                {
+                    module.Run();
                 }
             }
-
+            else
+            {
+                Console.WriteLine("Invalid input!");
+            }
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }

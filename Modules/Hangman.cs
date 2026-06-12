@@ -1,30 +1,49 @@
 using System;
 using System.Collections.Generic;
 using Minigames.Interfaces;
-
+using Minigames.DTOs;
+using Minigames.Helpers;
+using Minigames.Models;
+using Minigames.Exceptions;
 namespace Minigames.Modules;
 
 public class Hangman : IModule
 {
+    /// <summary>
+    /// defining the different class variables: list, dictionary, integer, string
+    /// </summary>
     public string Name => "Hangman";
-
+    private User user;
     private string word = "";
-    private Dictionary<char, int> revealedWord = new();
-    private List<char> lettersGuessed = new();
+    private Dictionary<char, int> revealedWord;
+    private List<char> lettersGuessed;
     private int numberOfAttempts;
+
+
+    public Hangman(User user)
+    {
+        this.user = user;
+        lettersGuessed = new();            
+        revealedWord = new();
+
+    }
 
     public void Run()
     {
-        word = GetRandomWord();           
+        user.Stats.TimesPlayed++;
+        lettersGuessed = new();
+        // Using helper method to get a random word form a test file.
+        word = WordHelper.GetRandomWord();
         revealedWord = new();
+        // number of attempts is initialized inside the loop , so that it can reset each time a game restarts
         numberOfAttempts = 15;
 
         Console.WriteLine("Hangman Game Starting...");
+        Console.WriteLine("Welcome to Hangman!");
 
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Welcome to Hangman!");
             Console.WriteLine($"Attempts left: {numberOfAttempts}\n");
             Console.WriteLine($"Letters guessed: {string.Join(" ", lettersGuessed)}\n");
 
@@ -32,19 +51,24 @@ public class Hangman : IModule
 
             Console.Write("\nEnter a letter: ");
 
-            string? input = Console.ReadLine();
-           
-            if (string.IsNullOrEmpty(input))
+            try
+            {
+                // DTO used to transfer validated input from helper to game logic
+                GuessDto guessDto = InputHelper.GetLetterInput();
+
+                lettersGuessed.Add(guessDto.Letter);
+                ProcessGuess(guessDto);
+            }
+            catch (InvalidInputException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadKey();
                 continue;
-
-            char guess = char.ToLower(input[0]);
-
-            lettersGuessed.Add(guess);
-
-            ProcessGuess(guess);  
+            }
 
             if (CheckWin())
             {
+                user.Stats.TimesWon++;
                 Console.WriteLine("\nYou won!");
                 break;
             }
@@ -55,13 +79,6 @@ public class Hangman : IModule
                 break;
             }
         }
-    }
-    private string GetRandomWord()
-    {
-        var words = File.ReadAllLines("Data/words.txt");
-
-        Random random = new Random();
-        return words[random.Next(words.Length)].ToLower();
     }
 
     public void DisplayWord()
@@ -88,19 +105,19 @@ public class Hangman : IModule
         Console.WriteLine();
     }
 
-    private void ProcessGuess(char guess)
+    private void ProcessGuess(GuessDto guess)
     {
         Console.WriteLine();
-        if (word.Contains(guess))
+        if (word.Contains(guess.Letter))
         {
-            if (!revealedWord.ContainsKey(guess))
-                revealedWord[guess] = 0;
+            if (!revealedWord.ContainsKey(guess.Letter))
+                revealedWord[guess.Letter] = 0;
 
-            int totalOccurrences = word.Count(x => x == guess);
+            int totalOccurrences = word.Count(x => x == guess.Letter);
 
-            if (revealedWord[guess] < totalOccurrences)
+            if (revealedWord[guess.Letter] < totalOccurrences)
             {
-                revealedWord[guess]++;
+                revealedWord[guess.Letter]++;
             }
         }
         else
@@ -114,7 +131,8 @@ public class Hangman : IModule
         foreach (char c in word)
         {
             int totalOccurrences = word.Count(x => x == c);
-            int revealed = revealedWord.ContainsKey(c) ? revealedWord[c] : 0;
+            //Using ternary to check if letter is in revealedWord. If it is present, get the value else return zero
+            int revealed = revealedWord.ContainsKey(c) ? revealedWord[c] : 0;  
 
             if (revealed < totalOccurrences)
             {

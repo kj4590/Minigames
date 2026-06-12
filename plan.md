@@ -5,12 +5,12 @@ Phase 1 — Project Setup
  Organise folders:
 
  Models - done
- Enums
- DTOs
- Helpers
+ Enums - done
+ DTOs - done
+ Helpers  - done
  Modules - done
  Interfaces - done
- Exceptions
+ Exceptions - done
 
 
  Create Program.cs entry point - done
@@ -33,7 +33,7 @@ Phase 1 — Project Setup
 
  Ensure one class per file - done
  Create menu system using List<IModule> - done
- Implement menu loop with while
+ Implement menu loop with while  - done
 
 
 ✅ Phase 3 — Models (Entities)
@@ -41,44 +41,44 @@ Phase 1 — Project Setup
  Create at least 4 classes (e.g., Player, GameSession, GameStats, WordEntry)
  Each class must include:
 
- Private fields
- Public properties
- Constructor
- At least one method
+ Private fields - done
+ Public properties - done
+ Constructor - done
+ At least one method - done
 
 
- Add relationships between classes
+ Add relationships between classes  - done
 
 
 ✅ Phase 4 — Enums
 
- Create at least 3 enums
+ Create at least 3 enums - done
 
- Example: GameStatus, Difficulty, PersonalityType
+ Example: 
 
 
- At least one enum must have explicit values
- Use enums in conditions or switch expressions
+ At least one enum must have explicit values  - done
+ Use enums in conditions or switch expressions  - done
 
 
 ✅ Phase 5 — Collections
 
- Use List<T> (e.g., words, guesses, sessions)
- Add/remove/iterate over lists
- Use Dictionary<TKey, TValue>
- Use at least one List with custom objects
+ Use List<T> (e.g., words, guesses, sessions) - done
+ Add/remove/iterate over lists - done
+ Use Dictionary<TKey, TValue> - done
+ Use at least one List with custom objects - done
  Use IEnumerable<T> where appropriate
 
 
 ✅ Phase 6 — Control Flow
 
- Add if / else if / else logic
- Use at least one switch expression
+ Add if / else if / else logic - done
+ Use at least one switch expression - done
  Include:
 
- for loop
- foreach loop
- while loop
+ for loop 
+ foreach loop - done
+ while loop - done
 
 
  Use ternary operator (? :)
@@ -96,9 +96,9 @@ Phase 1 — Project Setup
 
 ✅ Phase 8 — OOP
 
- Implement interface (IModule)
+ Implement interface (IModule)  - done
  Use polymorphism
- Use encapsulation (private + public accessors)
+ Use encapsulation (private + public accessors)  - done
  Ensure classes interact properly
 
 
@@ -106,7 +106,7 @@ Phase 1 — Project Setup
 
  Create at least 3 DTOs:
 
- Input DTO
+ Input DTO  (Data Transfer Object)
  Output DTO
  Transfer DTO
 
@@ -134,11 +134,11 @@ Phase 1 — Project Setup
 
 ✅ Phase 12 — Input & Output
 
- Use Console.ReadLine()
- Use TryParse() methods
- Use Console.WriteLine()
- Use string interpolation ($"...")
- Implement full menu system
+ Use Console.ReadLine()  - done
+ Use TryParse() methods - done
+ Use Console.WriteLine()  - done
+ Use string interpolation ($"...")  - done
+ Implement full menu system 
 
 
 ✅ Phase 13 — LINQ

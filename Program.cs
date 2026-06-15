@@ -1,5 +1,7 @@
 ﻿using Minigames.Interfaces;
 using Minigames.Modules;
+using Minigames.Services;
+using Minigames.Helpers;
 using Minigames.Enums;
 using Minigames.Models;
 
@@ -10,16 +12,43 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Load users from file
+        List<User> users = UserDataHelper.LoadUsers();
+
+        Console.Write("Leaderboard: ");
+
+        Leaderboard leaderboard = new Leaderboard(users);
+
+        var topPlayers = leaderboard.GetTopPlayersDto(3);
+
+        foreach (var player in topPlayers)
+        {
+            Console.WriteLine($"{player.Name} - {player.Wins} wins");
+        }
+
         Console.Write("Enter your name: ");
         string? name = Console.ReadLine();
 
-        User currentUser = new User
+        /* Using LINQ method FirstOrDefault & lambda expression to return first user occurence match
+            or null if not found */
+        User currentUser = users.FirstOrDefault(u => u.Name == name);
+
+        if (currentUser == null)
         {
-            Name = string.IsNullOrEmpty(name) ? "Guest" : name
-        };
+            //Search for user in list
+            currentUser = new User
+            {
+                Name = name
+            };
+            // Add the new user if user does not exists to the list and save it
+            users.Add(currentUser);
+        }
+
         while (true)
         {
             Console.Clear();
+
+            Console.WriteLine($"Welcome Player: {currentUser.Name}, Please select an option:");
 
             Console.WriteLine("1. Hangman");
             Console.WriteLine("2. Personality test");
@@ -36,6 +65,7 @@ class Program
 
                 if (option == MenuOption.Exit)
                 {
+                    UserDataHelper.SaveUsers(users);
                     Console.WriteLine("Exiting...");
                     return;
                 }
@@ -55,6 +85,8 @@ class Program
                 else
                 {
                     module.Run();
+                    //save user gamestats after game
+                    UserDataHelper.SaveUsers(users);
                 }
             }
             else

@@ -1,0 +1,30 @@
+[
+  {
+    "Name": "John",
+    "Stats": {
+      "TimesPlayed": 5,
+      "TimesWon": 3
+    }
+  },
+  {
+    "Name": "Alex",
+    "Stats": {
+      "TimesPlayed": 2,
+      "TimesWon": 1
+    }
+  },
+  {
+    "Name": "Sara",
+    "Stats": {
+      "TimesPlayed": 5,
+      "TimesWon": 3
+    }
+  },
+  {
+    "Name": "Tim",
+    "Stats": {
+      "TimesPlayed": 1,
+      "TimesWon": 1
+    }
+  }
+]

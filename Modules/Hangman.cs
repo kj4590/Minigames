@@ -9,9 +9,7 @@ namespace Minigames.Modules;
 
 public class Hangman : IModule
 {
-    /// <summary>
-    /// defining the different class variables: list, dictionary, integer, string
-    /// </summary>
+    // defining the different class variables: list, dictionary, integer, string
     public string Name => "Hangman";
     private User user;
     private string word = "";
@@ -142,4 +140,5 @@ public class Hangman : IModule
 
         return true;
     }
+
 }

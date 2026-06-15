@@ -27,7 +27,7 @@ Phase 1 — Project Setup
  Create modules:
 
  HangmanGame - done
- ImpatientCalculator
+ ExpressionGuess - partially done
  PersonalityCalculator
 
 
@@ -99,9 +99,9 @@ Phase 1 — Project Setup
 ✅ Phase 8 — OOP
 
  Implement interface (IModule)  - done
- Use polymorphism
+ Use polymorphism - done
  Use encapsulation (private + public accessors)  - done
- Ensure classes interact properly
+ Ensure classes interact properly - done
 
 
 ✅ Phase 9 — DTOs

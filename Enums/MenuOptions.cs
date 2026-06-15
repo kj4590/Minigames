@@ -6,5 +6,5 @@ public enum MenuOption
     Exit = 0,
     Hangman = 1,
    // PersonalityTest = 2,
-  //  ImpatientCalculator = 3
+  ExpressionGuess = 3
 }

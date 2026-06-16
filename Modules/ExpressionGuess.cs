@@ -17,7 +17,6 @@ public class ExpressionGuess : IModule
     }
     public void Run()
     {
-        user.Stats.NumbersGamesPlayed++;
 
         List<int> numbers = new() { 2, 5, 8, 10, 25, 50 };
         int target = 532;
@@ -32,10 +31,7 @@ public class ExpressionGuess : IModule
 
         if (difference.HasValue)
         {
-            if (difference.Value < user.Stats.BestNumbersDifference)
-            {
-                user.Stats.BestNumbersDifference = difference.Value;
-            }
+            StatsHelper.Update(user.Stats.Numbers, difference.Value);
         }
     }
 }

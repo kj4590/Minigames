@@ -27,8 +27,8 @@ Phase 1 — Project Setup
  Create modules:
 
  HangmanGame - done
- ExpressionGuess - partially done
- PersonalityCalculator
+ ExpressionGuess - done
+ PersonalityCalculator - not started
 
 
  Ensure one class per file - done
@@ -38,7 +38,7 @@ Phase 1 — Project Setup
 
 ✅ Phase 3 — Models (Entities)
 
- Create at least 4 classes (e.g., Player, GameSession, GameStats, WordEntry)
+ Create at least 4 classes 
  Each class must include:
 
  Private fields - done
@@ -48,8 +48,6 @@ Phase 1 — Project Setup
 
 
  Add relationships between classes  - done
-
-
 
 
 ✅ Phase 4 — Enums

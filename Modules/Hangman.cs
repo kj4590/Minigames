@@ -28,7 +28,7 @@ public class Hangman : IModule
 
     public void Run()
     {
-        user.Stats.TimesPlayed++;
+        StatsHelper.Update(user.Stats.Hangman, true);
         lettersGuessed = new();
         // Using helper method to get a random word form a test file.
         word = WordHelper.GetRandomWord();
@@ -66,13 +66,14 @@ public class Hangman : IModule
 
             if (CheckWin())
             {
-                user.Stats.TimesWon++;
+                StatsHelper.Update(user.Stats.Hangman, true);
                 Console.WriteLine("\nYou won!");
                 break;
             }
 
             if (numberOfAttempts <= 0)
             {
+                StatsHelper.Update(user.Stats.Hangman, false);
                 Console.WriteLine($"\nYou lost! The word was: {word}");
                 break;
             }

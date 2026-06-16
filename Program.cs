@@ -14,24 +14,38 @@ class Program
     {
         // Load users from file
         List<User> users = UserDataHelper.LoadUsers();
+        Leaderboard leaderboard = new Leaderboard(users);
 
         Console.Write("Leaderboard: ");
 
-        Leaderboard leaderboard = new Leaderboard(users);
+        var hangman = leaderboard.GetHangmanLeaderboard();
+        var numbers = leaderboard.GetNumbersLeaderboard();
+        var overall = leaderboard.GetOverallLeaderboard();
 
-        var topPlayers = leaderboard.GetTopPlayersDto(3);
-
-        foreach (var player in topPlayers)
+        Console.WriteLine("\n=== Hangman Leaderboard ===");
+        foreach (var p in hangman)
         {
-            Console.WriteLine($"{player.Name} - {player.Wins} wins");
+           Console.WriteLine($"{p.Name} - {p.Label}: {p.Value}");
+        }
+
+        Console.WriteLine("\n=== Numbers Leaderboard ===");
+        foreach (var p in numbers)
+        {
+            Console.WriteLine($"{p.Name} - {p.Label}: {p.Value}");
+        }
+        
+        Console.WriteLine("\n=== Overall Leaderboard ===");
+        foreach (var p in overall)
+        {
+            Console.WriteLine($"{p.Name} - {p.Label}: {p.Value}");
         }
 
         Console.Write("Enter your name: ");
-        string? name = Console.ReadLine();
+        string name = Console.ReadLine() ?? "Guest";
 
         /* Using LINQ method FirstOrDefault & lambda expression to return first user occurence match
             or null if not found */
-        User currentUser = users.FirstOrDefault(u => u.Name == name);
+        User? currentUser = users.FirstOrDefault(u => u.Name == name);
 
         if (currentUser == null)
         {
@@ -52,7 +66,6 @@ class Program
 
             Console.WriteLine("1. Hangman");
             Console.WriteLine("2. Expression Guess");
-          //  Console.WriteLine("3.  Personality test");
             Console.WriteLine("0. Exit");
             Console.Write("\nSelect an option: ");
 
@@ -74,7 +87,6 @@ class Program
                 {
                     MenuOption.Hangman => new Hangman(currentUser),
                     MenuOption.ExpressionGuess => new ExpressionGuess(currentUser),
-                   // MenuOption.ImpatientCalculator => new ImpatientCalculator(),
                     _ => null
                 };
 

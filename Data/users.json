@@ -2,46 +2,40 @@
   {
     "Name": "John",
     "Stats": {
-      "TimesPlayed": 5,
-      "TimesWon": 3,
-      "NumbersGamesPlayed": 0,
-      "BestNumbersDifference": 2147483647
-    }
-  },
-  {
-    "Name": "Alex",
-    "Stats": {
-      "TimesPlayed": 2,
-      "TimesWon": 1,
-      "NumbersGamesPlayed": 0,
-      "BestNumbersDifference": 2147483647
-    }
-  },
-  {
-    "Name": "Sara",
-    "Stats": {
-      "TimesPlayed": 5,
-      "TimesWon": 3,
-      "NumbersGamesPlayed": 0,
-      "BestNumbersDifference": 2147483647
+      "Hangman": {
+        "TimesPlayed": 5,
+        "TimesWon": 3
+      },
+      "Numbers": {
+        "TimesPlayed": 0,
+        "BestDifference": 2147483647
+      }
     }
   },
   {
     "Name": "Tim",
     "Stats": {
-      "TimesPlayed": 1,
-      "TimesWon": 1,
-      "NumbersGamesPlayed": 1,
-      "BestNumbersDifference": 11
+      "Hangman": {
+        "TimesPlayed": 1,
+        "TimesWon": 1
+      },
+      "Numbers": {
+        "TimesPlayed": 1,
+        "BestDifference": 11
+      }
     }
   },
   {
-    "Name": "Ana",
+    "Name": "Anna",
     "Stats": {
-      "TimesPlayed": 0,
-      "TimesWon": 0,
-      "NumbersGamesPlayed": 1,
-      "BestNumbersDifference": 0
+      "Hangman": {
+        "TimesPlayed": 2,
+        "TimesWon": 2
+      },
+      "Numbers": {
+        "TimesPlayed": 1,
+        "BestDifference": 0
+      }
     }
   }
 ]

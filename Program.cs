@@ -51,8 +51,8 @@ class Program
             Console.WriteLine($"Welcome Player: {currentUser.Name}, Please select an option:");
 
             Console.WriteLine("1. Hangman");
-            Console.WriteLine("2. Personality test");
-            Console.WriteLine("3. Impatient Calculator");
+            Console.WriteLine("2. Expression Guess");
+          //  Console.WriteLine("3.  Personality test");
             Console.WriteLine("0. Exit");
             Console.Write("\nSelect an option: ");
 
@@ -73,7 +73,7 @@ class Program
                 IModule? module = option switch
                 {
                     MenuOption.Hangman => new Hangman(currentUser),
-                    //MenuOption.PersonalityTest => new PersonalityTest(),
+                    MenuOption.ExpressionGuess => new ExpressionGuess(currentUser),
                    // MenuOption.ImpatientCalculator => new ImpatientCalculator(),
                     _ => null
                 };

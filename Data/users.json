@@ -3,28 +3,45 @@
     "Name": "John",
     "Stats": {
       "TimesPlayed": 5,
-      "TimesWon": 3
+      "TimesWon": 3,
+      "NumbersGamesPlayed": 0,
+      "BestNumbersDifference": 2147483647
     }
   },
   {
     "Name": "Alex",
     "Stats": {
       "TimesPlayed": 2,
-      "TimesWon": 1
+      "TimesWon": 1,
+      "NumbersGamesPlayed": 0,
+      "BestNumbersDifference": 2147483647
     }
   },
   {
     "Name": "Sara",
     "Stats": {
       "TimesPlayed": 5,
-      "TimesWon": 3
+      "TimesWon": 3,
+      "NumbersGamesPlayed": 0,
+      "BestNumbersDifference": 2147483647
     }
   },
   {
     "Name": "Tim",
     "Stats": {
       "TimesPlayed": 1,
-      "TimesWon": 1
+      "TimesWon": 1,
+      "NumbersGamesPlayed": 1,
+      "BestNumbersDifference": 11
+    }
+  },
+  {
+    "Name": "Ana",
+    "Stats": {
+      "TimesPlayed": 0,
+      "TimesWon": 0,
+      "NumbersGamesPlayed": 1,
+      "BestNumbersDifference": 0
     }
   }
 ]

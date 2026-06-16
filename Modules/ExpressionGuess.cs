@@ -1,17 +1,41 @@
-public class NumbersGame : IModule
+using System;
+using System.Collections.Generic;
+using Minigames.Interfaces;
+using Minigames.Helpers;
+using Minigames.DTOs;
+using Minigames.Models;
+namespace Minigames.Modules;
+
+public class ExpressionGuess : IModule
 {
     public string Name => "ExpressionGuess";
+    private User user;
 
+    public ExpressionGuess(User user)
+    {
+        this.user = user;
+    }
     public void Run()
     {
+        user.Stats.NumbersGamesPlayed++;
+
         List<int> numbers = new() { 2, 5, 8, 10, 25, 50 };
         int target = 532;
 
         Console.WriteLine($"Target: {target}");
         Console.WriteLine($"Numbers: {string.Join(", ", numbers)}");
 
+        Console.Write("\nEnter your expression: ");
         string? expression = Console.ReadLine();
 
-        ExpressionHelper.ValidateAndEvaluate(expression, numbers, target);
+        int? difference = ExpressionHelper.ValidateAndEvaluate(expression, numbers, target);
+
+        if (difference.HasValue)
+        {
+            if (difference.Value < user.Stats.BestNumbersDifference)
+            {
+                user.Stats.BestNumbersDifference = difference.Value;
+            }
+        }
     }
 }

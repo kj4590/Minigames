@@ -32,6 +32,16 @@ public class ExpressionGuess : IModule
         if (difference.HasValue)
         {
             StatsHelper.Update(user.Stats.Numbers, difference.Value);
+            if (difference == 0)
+            {
+                Console.WriteLine("Perfect match");
+            } else if (Math.abs(difference) <= 10 )
+            {
+                Console.WriteLine("You were quite close");
+            } else
+            {
+                Console.WriteLine("Nice try");
+            }
         }
     }
 }

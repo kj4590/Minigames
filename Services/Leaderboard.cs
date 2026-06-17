@@ -46,13 +46,15 @@ public class Leaderboard
     {
         return users
             .OrderByDescending(u => u.Stats.Hangman.TimesWon)
-            .ThenBy(u => u.Stats.Numbers.BestDifference)
-            .Take(3)
-            .Select(u => new LeaderboardDto(
-                u.Name,
-                u.Stats.Hangman.TimesWon,
-                "Combined Score"
-            ))
+            .Select(u =>
+            {
+                int score = u.Stats.Hangman.TimesWon;
+                if (u.Stats.Numbers.TimesPlayed > 0)
+                {
+                    score += Math.Max(0, 100 - u.Stats.Numbers.BestDifference);
+                }
+                return new LeaderboardDto(u.Name, score, "Combined Score");
+            })
             .ToList();
     }
 }

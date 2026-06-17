@@ -13,26 +13,22 @@ public class Hangman : IModule
     public string Name => "Hangman";
     private User user;
     private string word = "";
-    private Dictionary<char, int> revealedWord;
-    private List<char> lettersGuessed;
+    private readonly Dictionary<char, int> revealedWord = new();
+    private readonly List<char> lettersHistory = new();
     private int numberOfAttempts;
 
 
     public Hangman(User user)
     {
         this.user = user;
-        lettersGuessed = new();            
-        revealedWord = new();
-
     }
 
     public void Run()
     {
-        StatsHelper.Update(user.Stats.Hangman, true);
-        lettersGuessed = new();
+        lettersHistory = clear();
         // Using helper method to get a random word form a test file.
         word = WordHelper.GetRandomWord();
-        revealedWord = new();
+        revealedWord = clear();
         // number of attempts is initialized inside the loop , so that it can reset each time a game restarts
         numberOfAttempts = 15;
 
@@ -42,8 +38,9 @@ public class Hangman : IModule
         while (true)
         {
             Console.Clear();
+            Console.WriteLine("Repeated words must be guessed more than once ");
             Console.WriteLine($"Attempts left: {numberOfAttempts}\n");
-            Console.WriteLine($"Letters guessed: {string.Join(" ", lettersGuessed)}\n");
+            Console.WriteLine($"Letters guessed: {string.Join(" ", lettersHistory)}\n");
 
             DisplayWord();
 
@@ -54,7 +51,7 @@ public class Hangman : IModule
                 // DTO used to transfer validated input from helper to game logic
                 GuessDto guessDto = InputHelper.GetLetterInput();
 
-                lettersGuessed.Add(guessDto.Letter);
+                lettersHistory.Add(guessDto.Letter);
                 ProcessGuess(guessDto);
             }
             catch (InvalidInputException ex)

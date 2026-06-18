@@ -13,8 +13,8 @@ public class Hangman : IModule
     public string Name => "Hangman";
     private User user;
     private string word = "";
-    private readonly Dictionary<char, int> revealedWord = new();
-    private readonly List<char> lettersHistory = new();
+    private Dictionary<char, int> revealedWord = new();
+    private List<char> lettersHistory = new();
     private int numberOfAttempts;
 
 
@@ -25,10 +25,10 @@ public class Hangman : IModule
 
     public void Run()
     {
-        lettersHistory = clear();
+        lettersHistory = Clear();
         // Using helper method to get a random word form a test file.
         word = WordHelper.GetRandomWord();
-        revealedWord = clear();
+        revealedWord = Clear();
         // number of attempts is initialized inside the loop , so that it can reset each time a game restarts
         numberOfAttempts = 15;
 

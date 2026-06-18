@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.IO;
 using Minigames.Models;
 
 namespace Minigames.Helpers;
@@ -7,21 +8,32 @@ public static class UserDataHelper
 {
     private static string filePath = "Data/users.json";
 
-    // read users from file, if file doesn't exist return empty list
     public static List<User> LoadUsers()
     {
+        // Create file if it doesn't exist
         if (!File.Exists(filePath))
+        {
+            Directory.CreateDirectory("Data");
+            File.WriteAllText(filePath, "[]"); 
+        }
+
+        try
+        {
+            string json = File.ReadAllText(filePath);
+
+            return JsonSerializer.Deserialize<List<User>>(json)
+                   ?? new List<User>();
+        }
+        catch
+        {
             return new List<User>();
-
-        string json = File.ReadAllText(filePath);
-
-        return JsonSerializer.Deserialize<List<User>>(json)
-               ?? new List<User>();
+        }
     }
 
-    // add a new user to the list and save it to the file
     public static void SaveUsers(List<User> users)
     {
+        Directory.CreateDirectory("Data");
+
         string json = JsonSerializer.Serialize(users, new JsonSerializerOptions
         {
             WriteIndented = true

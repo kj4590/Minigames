@@ -37,5 +37,18 @@
         "BestDifference": 0
       }
     }
+  },
+  {
+    "Name": "Po",
+    "Stats": {
+      "Hangman": {
+        "TimesPlayed": 1,
+        "TimesWon": 1
+      },
+      "Numbers": {
+        "TimesPlayed": 1,
+        "BestDifference": 6
+      }
+    }
   }
 ]
